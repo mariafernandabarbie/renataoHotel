@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="exemplo de fallback">
-    <title>Hoteis- NA</title>
+    <title>Sparks Fly- Hotéis</title>
     <link rel="apple-touch-icon" href="images/pwa-icon-256.png" />
     <link rel="stylesheet" href="css/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,8 +13,48 @@
     <script type="module" src="js/script.js"></script>
     <script type="module" src="js/db.js"></script>
 </head>
-<body>
-    <h1>Vai ter que superar-ahahah</h1>
-    
+<body class="fullscreen">
+    <div class="container">
+        <nav>
+            <input type="text" id="campoBusca" placeholder="Buscar hotel">
+
+            <button id="btnBuscar">Buscar</button>
+
+           </nav>
+
+        <div class="card">
+
+        <h1 class="title">Meus Hotéis</h1>
+        <div style="text-align: center;">
+            <img src="https://i.pinimg.com/236x/b4/58/de/b458de6fa7a285028f72bad3da926d5a.jpg" alt="pwa" width="256" height="256">
+        </div>
+        
+        <div class="verdade">
+            <input type="text" id="titulo" placeholder="titulo"/><br/>
+            <input type="text" id="descricao" cols="30" rows="10" placeholder="Descrição"/><br/>
+            <input type="number" id="avaliacao" cols="30" rows="10" placeholder="avaliacao"/><br/>
+            <input type="text" id="local" placeholder="local"/><br/>
+            <input type="text" id="latitude" placeholder="latitude"/><br/>
+            <input type="text" id="longitude" placeholder="longitude"/><br/>
+            <button id="btnCadastro">Cadastrar</button><br/>
+            <button id="btnCarregar">Carregar Hotéis</button>
+        </div>
+        </div>
+        <div id="resultados">
+            
+        </div>
+
+        <div id="alterar">
+
+        </div>
+
+        <div id="lista"></div>
+        </div>
+
+        <footer>
+            <div>
+                <h3>Flavia Nunes Barboza de Morais & Maria Fernanda de Souza</h3>
+            </div>       
+        </footer>
 </body>
 </html>
