@@ -215,7 +215,11 @@ async function buscar(titulo) {
             console.log('Hotel não encontrado.');
 
             const resultadosDiv = document.getElementById('resultados');
-            resultadosDiv.innerHTML = 'Nenhum hotel encontrado com este nome.';
+            resultadosDiv.style.display = 'block';
+            resultadosDiv.innerHTML = `
+            <h1>Nenhum hotel encontrado com este nome</h1>`
+            resultadosDiv.scrollIntoView({ behavior: 'smooth' });
+            listagem('');
         }
     } catch (error) {
         console.error('Erro ao buscar hotel:', error);
