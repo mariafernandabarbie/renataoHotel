@@ -191,13 +191,13 @@ async function buscar(titulo) {
         const hotel = await store.get(titulo);
 
         if (hotel) {
-            console.log('Anotação encontrada:');
+            console.log('Hotel encontrado:');
             console.log(hotel);
 
             const resultadosDiv = document.getElementById('resultados');
             resultadosDiv.style.display = 'block';
             resultadosDiv.innerHTML = `
-                <h1>Anotação encontrada:</h1>
+                <h1>Hotel encontrado:</h1>
                 <p><spam>Título:</spam> ${hotel.titulo}</p>
                 <p><spam>avaliacao:</spam> ${hotel.avaliacao}</p>
                 <p><spam>Descrição:</spam> ${hotel.descricao}</p>
@@ -212,13 +212,13 @@ async function buscar(titulo) {
             listagem('');
 
         } else {
-            console.log('Anotação não encontrada.');
+            console.log('Hotel não encontrado.');
 
             const resultadosDiv = document.getElementById('resultados');
-            resultadosDiv.innerHTML = 'Nenhuma anotação encontrada com este título.';
+            resultadosDiv.innerHTML = 'Nenhum hotel encontrado com este nome.';
         }
     } catch (error) {
-        console.error('Erro ao buscar anotação:', error);
+        console.error('Erro ao buscar hotel:', error);
     }
 }
 
