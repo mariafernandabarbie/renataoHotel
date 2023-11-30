@@ -47,6 +47,8 @@ async function buscarTodosHoteis(){
                     <spam>${hotel.latitude}-${hotel.longitude}</spam><br/>
                     <button class="btnDeletar" data-item-id="${hotel.titulo}" data-item-avaliacao="${hotel.avaliacao}" data-item-descricao="${hotel.descricao}" data-item-local="${hotel.local}" data-item-latitude="${hotel.latitude}" data-item-longitude="${hotel.longitude}">Deletar</button>
                     <button class="btnAlterar" data-item-id="${hotel.titulo}" data-item-avaliacao="${hotel.avaliacao}" data-item-descricao="${hotel.descricao}" data-item-local="${hotel.local}" data-item-latitude="${hotel.latitude}" data-item-longitude="${hotel.longitude}">Alterar</button>
+                    <button class="btnMapa" data-item-id="${hotel.titulo}" data-item-avaliacao="${hotel.avaliacao}" data-item-descricao="${hotel.descricao}" data-item-local="${hotel.local}" data-item-latitude="${hotel.latitude}" data-item-longitude="${hotel.longitude}">Procurar no mapa</button>
+
                    </div>`;
         });
         listagem(divLista.join(' '));
@@ -89,6 +91,8 @@ function listagem(text) {
     document.getElementById('lista').innerHTML = text;
     const deleteButtons = document.querySelectorAll('.btnDeletar');
     const alterarButtons = document.querySelectorAll('.btnAlterar');
+    const buscarButtons = document.querySelectorAll('.btnMapa');
+
 
     deleteButtons.forEach(button => {
         button.addEventListener('click', async () => {
@@ -111,6 +115,38 @@ function listagem(text) {
             await alterarHotel(itemId, avaliacao, descricao, local, latitude, longitude);
         });
     });
+
+    buscarButtons.forEach(button => {
+        button.addEventListener('click', async () => {
+            const latitude = button.getAttribute('data-item-latitude');
+            const longitude = button.getAttribute('data-item-longitude');
+            mostrarMapa(latitude, longitude);
+        });
+    });
+
+}
+
+function mostrarMapa(latitude, longitude) {
+    const mapDiv = document.getElementById('mapa');
+    if (!mapDiv) {
+        console.error('Elemento com o ID "mapa" não encontrado no HTML.');
+        return;
+    }
+
+    mapDiv.style.display = 'block';
+    mapDiv.innerHTML = `
+        <div class="mapouter">
+            <div class="gmap_canvas">
+                <iframe width="600" height="500" id="gmap_canvas"
+                    src="https://maps.google.com/maps?q=${latitude},${longitude}&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                <a href="https://123movies-i.net"></a>
+                <br>
+                <style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style>
+                <a href="https://www.embedgooglemap.net"></a>
+                <style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style>
+            </div>
+        </div>`;
 }
 
 async function alterarHotel(titulo, avaliacao, descricao, local, latitude, longitude) {
@@ -158,8 +194,8 @@ async function alterarHotel(titulo, avaliacao, descricao, local, latitude, longi
             
             buscarTodosHoteis();
         })}catch{
-        console.error('Erro ao deletar registro:', error);
-        tx.abort();
+            console.error('Erro ao deletar registro:', error);
+            tx.abort();
        } 
        
         }
@@ -205,6 +241,8 @@ async function buscar(titulo) {
                 <p><spam>${hotel.latitude}-${hotel.longitude}</spam> </p>
                 <button class="btnDeletar" data-item-id="${hotel.titulo}" data-item-avaliacao="${hotel.avaliacao}" data-item-descricao="${hotel.descricao}" data-item-local="${hotel.local}" data-item-latitude="${hotel.latitude}" data-item-longitude="${hotel.longitude}">Deletar</button>
                 <button class="btnAlterar" data-item-id="${hotel.titulo}" data-item-avaliacao="${hotel.avaliacao}" data-item-descricao="${hotel.descricao}" data-item-local="${hotel.local}" data-item-latitude="${hotel.latitude}" data-item-longitude="${hotel.longitude}">Alterar</button>
+                <button class="l" data-item-id="${hotel.titulo}" data-item-avaliacao="${hotel.avaliacao}" data-item-descricao="${hotel.descricao}" data-item-local="${hotel.local}" data-item-latitude="${hotel.latitude}" data-item-longitude="${hotel.longitude}">Alterar</button>
+
             `;
 
 
