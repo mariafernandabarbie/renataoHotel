@@ -41,10 +41,9 @@ async function buscarTodosHoteis(){
         const divLista = hoteis.map(hotel => {
             return `<div class="item">
                     <h1>${hotel.titulo}</h1> 
-                    <spam>${hotel.avaliacao}</spam>
+                    <spam>${hotel.avaliacao} estrelas</spam>
                     <p>${hotel.descricao}</p>
                     <spam>${hotel.local}</spam><br/>
-                    <spam>${hotel.latitude}-${hotel.longitude}</spam><br/>
                     <button class="btnDeletar" data-item-id="${hotel.titulo}" data-item-avaliacao="${hotel.avaliacao}" data-item-descricao="${hotel.descricao}" data-item-local="${hotel.local}" data-item-latitude="${hotel.latitude}" data-item-longitude="${hotel.longitude}">Deletar</button>
                     <button class="btnAlterar" data-item-id="${hotel.titulo}" data-item-avaliacao="${hotel.avaliacao}" data-item-descricao="${hotel.descricao}" data-item-local="${hotel.local}" data-item-latitude="${hotel.latitude}" data-item-longitude="${hotel.longitude}">Alterar</button>
                     <button class="btnMapa" data-item-id="${hotel.titulo}" data-item-avaliacao="${hotel.avaliacao}" data-item-descricao="${hotel.descricao}" data-item-local="${hotel.local}" data-item-latitude="${hotel.latitude}" data-item-longitude="${hotel.longitude}">Procurar no mapa</button>
@@ -147,7 +146,26 @@ function mostrarMapa(latitude, longitude) {
                 <style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style>
             </div>
         </div>`;
+
+    // Show user's current location on the map
+    navigator.geolocation.getCurrentPosition(position => {
+        const userLatitude = position.coords.latitude;
+        const userLongitude = position.coords.longitude;
+
+        const userMarker = document.createElement('div');
+        userMarker.className = 'user-marker';
+        userMarker.style.position = 'absolute';
+        userMarker.style.width = '20px';
+        userMarker.style.height = '20px';
+        userMarker.style.borderRadius = '50%';
+        userMarker.style.backgroundColor = 'blue';
+        userMarker.style.left = `${(userLongitude - longitude) * 111 * 5 + 300}px`;
+        userMarker.style.top = `${(userLatitude - latitude) * 111 * 5 + 250}px`;
+
+        mapDiv.querySelector('.gmap_canvas').appendChild(userMarker);
+    });
 }
+
 
 async function alterarHotel(titulo, avaliacao, descricao, local, latitude, longitude) {
     const div = document.getElementById("alterar")
