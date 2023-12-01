@@ -147,7 +147,6 @@ function mostrarMapa(latitude, longitude) {
             </div>
         </div>`;
 
-    // Show user's current location on the map
     navigator.geolocation.getCurrentPosition(position => {
         const userLatitude = position.coords.latitude;
         const userLongitude = position.coords.longitude;
