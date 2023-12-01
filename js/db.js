@@ -146,6 +146,7 @@ function mostrarMapa(latitude, longitude) {
                 <style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style>
             </div>
         </div>`;
+        mapDiv.scrollIntoView({ behavior: 'smooth' });
 
     navigator.geolocation.getCurrentPosition(position => {
         const userLatitude = position.coords.latitude;
